@@ -13,13 +13,8 @@ Detect user location by IP using MaxMind GeoLite2 City database. Automatically u
 
 ## Installation
 1. Clone or copy the plugin to your `wp-content/plugins/geoip-location` directory.
-2. Install the required PHP library using Composer:
-   ```sh
-   composer require geoip2/geoip2
-   ```
-   If Composer is not installed, see [Composer Installation](https://getcomposer.org/download/).
-3. Activate the plugin in WordPress admin.
-4. Go to **Settings > GeoIP Location** and enter your MaxMind Account ID and License Key.
+2. Activate the plugin in WordPress admin.
+3. Go to **Settings > GeoIP Location** and enter your MaxMind Account ID and License Key.
 
 ## Usage
 ### In Your Theme or Plugin
@@ -44,6 +39,10 @@ if (class_exists('GeoIP_Location')) {
 ## Troubleshooting
 - If you see errors about missing classes, make sure Composer dependencies are installed.
 - If the database is not downloading, check your credentials and file permissions.
+
+
+## Notes
+- Only the file `GeoLite2-City.mmdb` in the main plugin folder is used by the plugin. Any folder like `GeoLite2-City_YYYYMMDD/` is a backup from extraction and can be deleted if not needed.
 
 ## License
 This plugin uses the MaxMind GeoLite2 database. See [MaxMind GeoLite2 EULA](https://www.maxmind.com/en/geolite2/eula) for details.
