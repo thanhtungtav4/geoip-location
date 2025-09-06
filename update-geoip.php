@@ -1,5 +1,4 @@
-
-
+<?php
 // Get credentials from options
 $accountId  = get_option('geoip_location_account_id', '');
 $licenseKey = get_option('geoip_location_license_key', '');
