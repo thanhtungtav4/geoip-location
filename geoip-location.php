@@ -45,18 +45,51 @@ add_action('admin_menu', function() {
     );
 });
 
+// Register settings
+add_action('admin_init', function() {
+    register_setting('geoip_location_settings', 'geoip_location_account_id');
+    register_setting('geoip_location_settings', 'geoip_location_license_key');
+});
+
 function geoip_location_settings_page() {
     $geoip = new GeoIP_Location();
     $test_ip = isset($_POST['test_ip']) ? sanitize_text_field($_POST['test_ip']) : $_SERVER['REMOTE_ADDR'];
     $location = $geoip->get_location($test_ip);
 
+    $account_id = get_option('geoip_location_account_id', '');
+    $license_key = get_option('geoip_location_license_key', '');
+
+    if (isset($_POST['geoip_location_save_settings'])) {
+        update_option('geoip_location_account_id', sanitize_text_field($_POST['geoip_location_account_id']));
+        update_option('geoip_location_license_key', sanitize_text_field($_POST['geoip_location_license_key']));
+        $account_id = get_option('geoip_location_account_id', '');
+        $license_key = get_option('geoip_location_license_key', '');
+        echo '<div class="updated"><p>Settings saved.</p></div>';
+    }
+
     ?>
     <div class="wrap">
         <h1>GeoIP Location</h1>
         <form method="post">
+            <h2>MaxMind Credentials</h2>
+            <table class="form-table">
+                <tr>
+                    <th scope="row"><label for="geoip_location_account_id">Account ID</label></th>
+                    <td><input type="text" name="geoip_location_account_id" id="geoip_location_account_id" value="<?php echo esc_attr($account_id); ?>" class="regular-text" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="geoip_location_license_key">License Key</label></th>
+                    <td><input type="text" name="geoip_location_license_key" id="geoip_location_license_key" value="<?php echo esc_attr($license_key); ?>" class="regular-text" /></td>
+                </tr>
+            </table>
+            <p><input type="submit" name="geoip_location_save_settings" class="button button-primary" value="Save Settings" /></p>
+        </form>
+
+        <form method="post">
+            <h2>Test IP</h2>
             <label for="test_ip">Test IP:</label>
             <input type="text" name="test_ip" value="<?php echo esc_attr($test_ip); ?>" />
-            <button type="submit" class="button button-primary">Check</button>
+            <button type="submit" class="button">Check</button>
         </form>
 
         <?php if ($location): ?>

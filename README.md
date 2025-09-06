@@ -1,4 +1,3 @@
-
 # GeoIP Location WordPress Plugin
 
 Detect user location by IP using MaxMind GeoLite2 City database. Automatically updates the database monthly. Easily configure MaxMind credentials from the WordPress admin settings.
@@ -25,15 +24,15 @@ Detect user location by IP using MaxMind GeoLite2 City database. Automatically u
 ### In Your Theme or Plugin
 ```php
 if (class_exists('GeoIP_Location')) {
-  $geoip = new GeoIP_Location();
-  $location = $geoip->get_location(); // Uses current user's IP
-  // $location = $geoip->get_location('8.8.8.8'); // Or specify an IP
-  if ($location) {
-    echo 'City: ' . $location['city'] . '<br>';
-    echo 'Country: ' . $location['country'] . '<br>';
-  } else {
-    echo 'Location not found.';
-  }
+    $geoip = new GeoIP_Location();
+    $location = $geoip->get_location(); // Uses current user's IP
+    // $location = $geoip->get_location('8.8.8.8'); // Or specify an IP
+    if ($location) {
+        echo 'City: ' . $location['city'] . '<br>';
+        echo 'Country: ' . $location['country'] . '<br>';
+    } else {
+        echo 'Location not found.';
+    }
 }
 ```
 

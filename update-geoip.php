@@ -1,8 +1,8 @@
 
-<?php
-// MaxMind credentials
-$accountId  = '379034';
-$licenseKey = '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';
+
+// Get credentials from options
+$accountId  = get_option('geoip_location_account_id', '');
+$licenseKey = get_option('geoip_location_license_key', '');
 $url        = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key={$licenseKey}&suffix=tar.gz";
 
 $dbPath     = __DIR__ . '/GeoLite2-City.mmdb';
